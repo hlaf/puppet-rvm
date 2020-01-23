@@ -5,7 +5,8 @@ class rvm::system(
   $no_proxy=undef,
   $key_server=undef,
   $home=$::root_home,
-  $gnupg_key_id=$rvm::params::gnupg_key_id) inherits rvm::params {
+  $gnupg_key_id=$rvm::params::gnupg_key_id,
+  $manage_curl=$rvm::params::manage_curl) inherits rvm::params {
 
   $actual_version = $version ? {
     undef     => 'latest',
@@ -17,7 +18,9 @@ class rvm::system(
   if ! defined(Package['curl']) {
     case $::kernel {
       'Linux': {
-        ensure_packages(['curl'])
+        if $manage_curl {
+          ensure_packages(['curl'])
+        }
         Package['curl'] -> Exec['system-rvm']
       }
       default: {}

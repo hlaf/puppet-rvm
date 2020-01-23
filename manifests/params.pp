@@ -26,4 +26,7 @@ class rvm::params($manage_group = true) {
     /(Linux|Darwin)/ => 'gnupg2',
     default          => undef,
   }
+
+  $manage_curl = true
+
 }

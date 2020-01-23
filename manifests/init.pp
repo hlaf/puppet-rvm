@@ -4,6 +4,7 @@ class rvm(
   $install_rvm=true,
   $install_dependencies=false,
   $manage_rvmrc=$rvm::params::manage_rvmrc,
+  $manage_curl=$rvm::params::manage_curl,
   $system_users=[],
   $system_rubies={},
   $rvm_gems={},
@@ -31,6 +32,7 @@ class rvm(
       no_proxy     => $no_proxy,
       key_server   => $key_server,
       gnupg_key_id => $gnupg_key_id,
+      manage_curl  => $manage_curl,
     }
   }
 
